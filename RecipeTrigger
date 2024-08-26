@@ -1,0 +1,25 @@
+//RAD Part II Week 4 Homework
+trigger RecipeTrigger on Recipe__c (before insert, after insert, before update, after update) {
+   
+RecipeHandler handler = new RecipeHandler(Trigger.new, Trigger.oldMap);
+    
+    if(Trigger.isBefore) {
+       if(Trigger.isInsert){
+           	handler.markDraft();
+           	handler.markComplexity();
+        }
+        
+       if(Trigger.isUpdate){
+            handler.markDraft();
+            handler.markComplexity();
+       	}
+    }
+	if(Trigger.isAfter){
+          if(Trigger.isInsert){
+                handler.reviewTask();
+          }
+          if(Trigger.isUpdate){
+		handler.reviewTask();
+          }
+	}
+}
