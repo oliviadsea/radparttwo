@@ -1,0 +1,11 @@
+//RAD Part II Week 3 Homework
+trigger LeadTrigger on Lead (after insert, after update) {
+
+   if(Trigger.isAfter) {
+        if(Trigger.isInsert){
+            LeadProductInterestTask.handleAfterInsert(Trigger.new);
+        } else if(Trigger.isUpdate){
+            LeadProductInterestTask.handleAfterUpdate(Trigger.newMap, Trigger.oldMap);
+        }
+   }  
+}
